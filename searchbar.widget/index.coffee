@@ -9,12 +9,15 @@ render: () -> """
 afterRender: (enter) ->
   $(enter).on 'click', '#enter', =>
     str = document.getElementById('keyword').value
-    result = str.indexOf("http")
-    if result != -1
+    result1 = str.indexOf("http")
+    result2 = str.indexOf('.')
+    if result1 != -1 && result2 = -1
         marker = str.indexOf(':')
         url = str.substr(marker + 3)
         @run "open 'https://'" + url
-    else
+    else if result1 = -1 && result2 != -1
+        @run "open 'https://'" + str
+    else if result1 = -1 && result2 = -1
         targetStr = ' '
         regExp = new RegExp(targetStr, 'g')
         search = str.replace(regExp, '+')
